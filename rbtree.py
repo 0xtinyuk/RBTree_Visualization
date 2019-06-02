@@ -94,6 +94,28 @@ class RBTree:
                 parent.right = left
         pass
 
+    def search_node(self, val):
+        if not self.root:
+            return False
+
+        cur = self.root
+        while cur:
+            if cur.val == val:
+                return True
+
+            if cur.val < val:
+                if not cur.right:
+                    return False
+                cur = cur.right
+                continue
+
+            if cur.val > val:
+                if not cur.left:
+                    return False
+                cur = cur.left
+                continue
+        return False
+
     def insert_node(self, node):
         if not self.root:
             self.root = node

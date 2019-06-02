@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import tkinter
 from PIL import Image, ImageTk
 import functools
@@ -81,34 +82,49 @@ def delete_node(event):
     pass
 
 
+def search_node(event):
+    global e1, tree
+    val = int(e1.get())
+    keep_loading_img()
+    if tree.search_node(val):
+        tkinter.messagebox.showinfo('查找结果', '{}存在'.format(val))
+    else:
+        tkinter.messagebox.showinfo('查找结果', '{}不存在'.format(val))
+    e1.delete(0, 'end')
+    pass
+
+
 root.title('红黑树演示程序')
 root.resizable(True, True)
 root.geometry("")
-root.wm_attributes('-topmost', 1)
+root.wm_attributes('-topmost', 1)  # 将窗口置于最前
+root.after(1000, lambda: root.attributes("-topmost", 0))  # 1秒后取消窗口置于最前，避免挡住弹窗
 
 frame1 = tkinter.Frame(root, bd=2, relief='solid')
 label_img = tkinter.Label(frame1)
 label_img.pack(expand=1)
 frame2 = tkinter.Frame(root, relief='solid')
 e1 = tkinter.Entry(frame2, width=10, justify=tkinter.RIGHT)
+b0 = tkinter.Button(frame2, text="查找")
 b1 = tkinter.Button(frame2, text="插入")
 b2 = tkinter.Button(frame2, text="删除")
 b3 = tkinter.Button(frame2, text="下一步")
 b4 = tkinter.Button(frame2, text="上一步")
+b0.bind("<Button-1>", search_node)
 b1.bind("<Button-1>", insert_node)
 b2.bind("<Button-1>", delete_node)
 b3.bind("<Button-1>", next_img)
 b4.bind("<Button-1>", last_img)
 
-frame1.grid(row=0)  
+frame1.grid(row=0)
 frame2.grid(row=1)
-e1.pack(side=tkinter.LEFT, fill=tkinter.X)  
+e1.pack(side=tkinter.LEFT, fill=tkinter.X)
 b3.pack(side=tkinter.RIGHT)
 b4.pack(side=tkinter.RIGHT)
 b2.pack(side=tkinter.RIGHT)
 b1.pack(side=tkinter.RIGHT)
+b0.pack(side=tkinter.RIGHT)
 
 frame1.grid_propagate(False)
 manager.extend([frame1, label_img, e1, b1, b2, b3])
 root.mainloop()
-
