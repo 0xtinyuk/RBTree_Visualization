@@ -54,7 +54,6 @@ def show_node(node, ax, height, index, font_size=12):
     ax.add_artist(plt.Circle((x, y), 50, color=circle_color))
     ax.add_artist(plt.Text(x, y, node.val, color=text_color, fontsize=font_size,
                            horizontalalignment="center", verticalalignment="center"))
-    # print(str(node.val), (height, index))
 
     index += 1
     if node.right:
@@ -64,27 +63,11 @@ def show_node(node, ax, height, index, font_size=12):
     return x, y, index
 
 
-def draw_node_line(node, ax, height, index):
-    x1, y1 = None, None
-    if node.left:
-        x1, y1, index = draw_node_line(node.left, ax, height-1, index)
-    x = 100 * index - 50
-    y = 100 * height - 50
-    if x1:
-        plt.plot((x1, x), (y1, y), linewidth=2.0, color='b')
-    index += 1
-    if node.right:
-        x1, y1, index = draw_node_line(node.right, ax, height-1, index)
-        plt.plot((x1, x), (y1, y), linewidth=2.0, color='b')
-
-    return x, y, index
-
-
 def show_rb_tree(tree, title):
     fig, ax = plt.subplots()
     left, right, height = get_left_length(
         tree), get_right_length(tree), get_height(tree)
-    # print(left, right, height)
+
     plt.ylim(0, height*100+100)
     plt.xlim(0, 100 * get_node_count(tree) + 100)
     show_node(tree, ax, height, 1)
@@ -102,9 +85,7 @@ def save_rb_tree(tree, index):
     if w < 400:
         w = 400
         h = h * 400/w
-    # plt.text(w/2-50, h-40, index, size=30,
-    #         family = "fantasy", color = "r", style = "italic", weight = "light",
-    #         bbox = dict(facecolor="r", alpha=0.2))
+
     plt.ylim(0, h)
     plt.xlim(0, w)
     plt.axis('off')
@@ -112,6 +93,5 @@ def save_rb_tree(tree, index):
 
     fig.set_size_inches(10, h/(w/10))
     plt.savefig("pics/output{}.png".format(index))
-    # plt.savefig("rb/rbtree_{}.png".format(index))
+
     print("pics/output{}.png".format(index))
-    # print("rb/rbtree_{}".format(index))

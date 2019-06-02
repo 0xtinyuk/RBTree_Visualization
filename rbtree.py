@@ -43,8 +43,8 @@ class RBTreeNode:
 
 class RBTree:
     def __init__(self):
-        self.root = None
-        self.index = 0
+        self.root = None#根结点
+        self.index = 0#当前产生图像位置
         self.action = ""
 
     def snapshot(self):
