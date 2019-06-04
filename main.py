@@ -94,7 +94,7 @@ def search_node(event):
     pass
 
 
-root.title('红黑树演示程序')
+root.title('红黑树演示系统')
 root.resizable(True, True)
 root.geometry("")
 root.wm_attributes('-topmost', 1)  # 将窗口置于最前

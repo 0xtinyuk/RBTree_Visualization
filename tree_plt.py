@@ -63,23 +63,11 @@ def show_node(node, ax, height, index, font_size=12):
     return x, y, index
 
 
-def show_rb_tree(tree, title):
-    fig, ax = plt.subplots()
-    left, right, height = get_left_length(
-        tree), get_right_length(tree), get_height(tree)
-
-    plt.ylim(0, height*100+100)
-    plt.xlim(0, 100 * get_node_count(tree) + 100)
-    show_node(tree, ax, height, 1)
-    plt.show()
-
-
 def save_rb_tree(tree, index):
     fig, ax = plt.subplots()
     fig.set_facecolor('gray')
     left, right, height = get_left_length(
         tree), get_right_length(tree), get_height(tree)
-    # print(left, right, height)
     h = height*100+100
     w = 100 * get_node_count(tree) + 100
     if w < 400:
@@ -90,8 +78,6 @@ def save_rb_tree(tree, index):
     plt.xlim(0, w)
     plt.axis('off')
     show_node(tree, ax, height, 1, get_fontsize(get_node_count(tree)))
-
     fig.set_size_inches(10, h/(w/10))
     plt.savefig("pics/output{}.png".format(index))
-
     print("pics/output{}.png".format(index))

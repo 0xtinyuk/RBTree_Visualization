@@ -1,5 +1,5 @@
 import functools
-from tree_plt import show_rb_tree, save_rb_tree
+from tree_plt import save_rb_tree
 
 
 def tree_log(func):
@@ -43,8 +43,8 @@ class RBTreeNode:
 
 class RBTree:
     def __init__(self):
-        self.root = None#根结点
-        self.index = 0#当前产生图像位置
+        self.root = None  # 根结点
+        self.index = 0  # 当前产生图像位置
         self.action = ""
 
     def snapshot(self):
@@ -73,7 +73,6 @@ class RBTree:
         pass
 
     def right_rotate(self, node):
-        print("right rotate", node.val)
         parent = node.parent
         left = node.left
 
@@ -161,7 +160,8 @@ class RBTree:
         if not grand:
             self.check_node(node.parent)
             return
-        if grand.left and grand.left.is_red_node() and grand.right and grand.right.is_red_node():
+        if grand.left and grand.left.is_red_node() \
+                and grand.right and grand.right.is_red_node():
             grand.left.set_black_node()
             grand.right.set_black_node()
             grand.set_red_node()
@@ -198,11 +198,7 @@ class RBTree:
         self.action = 'insert node {}'.format(node.val)
         if self.insert_node(node):
             self.snapshot()
-            # if self.root != node and node.parent and node.parent.is_black_node():
-            #    pass
-            # else:
             self.check_node(node)
-            #    self.snapshot()
         pass
 
     def check_delete_node(self, node):
@@ -225,8 +221,9 @@ class RBTree:
             return
 
         all_none = not brother.left and not brother.right
-        all_black = brother.left and brother.right and brother.left.is_black_node(
-        ) and brother.right.is_black_node()
+        all_black = brother.left and brother.right \
+            and brother.left.is_black_node(
+            ) and brother.right.is_black_node()
         if all_none or all_black:
             brother.set_red_node()
             if node.parent.is_red_node():
@@ -236,10 +233,11 @@ class RBTree:
             self.check_delete_node(node.parent)
             return
 
-        brother_same_right_red = node_is_left and brother.right and brother.right.is_red_node()
-        brother_same_left_red = not node_is_left and brother.left and brother.left.is_red_node()
+        brother_same_right_red = node_is_left \
+            and brother.right and brother.right.is_red_node()
+        brother_same_left_red = not node_is_left \
+            and brother.left and brother.left.is_red_node()
         if brother_same_right_red or brother_same_left_red:
-
             if node.parent.is_red_node():
                 brother.set_red_node()
             else:
@@ -252,12 +250,13 @@ class RBTree:
             else:
                 brother.left.set_black_node()
                 self.right_rotate(node.parent)
-
             self.snapshot()
             return True
 
-        brother_diff_right_red = not node_is_left and brother.right and brother.right.is_red_node()
-        brother_diff_left_red = node_is_left and brother.left and brother.left.is_red_node()
+        brother_diff_right_red = not node_is_left \
+            and brother.right and brother.right.is_red_node()
+        brother_diff_left_red = node_is_left \
+            and brother.left and brother.left.is_red_node()
         if brother_diff_right_red or brother_diff_left_red:
             brother.set_red_node()
             if brother_diff_right_red:
