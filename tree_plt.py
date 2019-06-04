@@ -3,22 +3,6 @@ import matplotlib.pylab as pylab
 import numpy as np
 
 
-def get_left_length(node):
-    if not node:
-        return 0
-    if not node.left:
-        return 1
-    if not node.right:
-        return 2 + get_left_length(node.right)
-    return 2 + get_left_length(node.left)
-
-
-def get_right_length(node):
-    if not node:
-        return 0
-    return 1 + get_right_length(node.right)
-
-
 def get_height(node):
     if not node:
         return 0
@@ -66,14 +50,9 @@ def show_node(node, ax, height, index, font_size=12):
 def save_rb_tree(tree, index):
     fig, ax = plt.subplots()
     fig.set_facecolor('gray')
-    left, right, height = get_left_length(
-        tree), get_right_length(tree), get_height(tree)
+    height = get_height(tree)
     h = height*100+100
     w = 100 * get_node_count(tree) + 100
-    if w < 400:
-        w = 400
-        h = h * 400/w
-
     plt.ylim(0, h)
     plt.xlim(0, w)
     plt.axis('off')

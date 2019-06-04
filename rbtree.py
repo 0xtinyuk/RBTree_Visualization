@@ -1,16 +1,4 @@
-import functools
 from tree_plt import save_rb_tree
-
-
-def tree_log(func):
-    @functools.wraps(func)
-    def function(self, node):
-        #save_rb_tree(self.root, "{}-{}".format(self.index, self.action))
-        # self.snapshot()
-        func(self, node)
-        # self.snapshot()
-
-    return function
 
 
 class RBTreeNode:
@@ -44,8 +32,9 @@ class RBTreeNode:
 class RBTree:
     def __init__(self):
         self.root = None  # 根结点
-        self.index = 0  # 当前产生图像位置
+        self.index = -1  # 当前产生图像位置
         self.action = ""
+        self.snapshot()
 
     def snapshot(self):
         self.index += 1
@@ -142,7 +131,6 @@ class RBTree:
                 return False
         pass
 
-    # @tree_log
     def check_node(self, node):
         if self.root == node:
             self.root.set_black_node()
