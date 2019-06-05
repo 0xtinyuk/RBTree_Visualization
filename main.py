@@ -107,9 +107,51 @@ def switch_tree(event):
     if type(tree) == rbtree.RBTree:
         tree = bstree.BSTree()
         b_switch_tree.config(text="新建红黑树")
+        b_pre_order.config(state=tkinter.NORMAL)
+        b_in_order.config(state=tkinter.NORMAL)
+        b_post_order.config(state=tkinter.NORMAL)
     else:
         tree = rbtree.RBTree()
         b_switch_tree.config(text="新建二叉搜索树")
+        b_pre_order.config(state=tkinter.DISABLED)
+        b_in_order.config(state=tkinter.DISABLED)
+        b_post_order.config(state=tkinter.DISABLED)
+    keep_loading_img()
+    pass
+
+
+def pre_order_traversal(event):
+    global tree
+    if type(tree) == rbtree.RBTree:
+        return
+
+    result = tree.pre_order_traversal(tree.root)
+    tree.snapshot()
+    tkinter.messagebox.showinfo('遍历结果', '遍历顺序为{}'.format(result))
+    keep_loading_img()
+    pass
+
+
+def in_order_traversal(event):
+    global tree
+    if type(tree) == rbtree.RBTree:
+        return
+
+    result = tree.in_order_traversal(tree.root)
+    tree.snapshot()
+    tkinter.messagebox.showinfo('遍历结果', '遍历顺序为{}'.format(result))
+    keep_loading_img()
+    pass
+
+
+def post_order_traversal(event):
+    global tree
+    if type(tree) == rbtree.RBTree:
+        return
+
+    result = tree.post_order_traversal(tree.root)
+    tree.snapshot()
+    tkinter.messagebox.showinfo('遍历结果', '遍历顺序为{}'.format(result))
     keep_loading_img()
     pass
 
@@ -135,6 +177,9 @@ b2 = tkinter.Button(frame2, text="删除")
 b3 = tkinter.Button(frame2, text="下一步")
 b4 = tkinter.Button(frame2, text="上一步")
 b_switch_tree.bind("<Button-1>", switch_tree)
+b_pre_order.bind("<Button-1>", pre_order_traversal)
+b_in_order.bind("<Button-1>", in_order_traversal)
+b_post_order.bind("<Button-1>", post_order_traversal)
 b0.bind("<Button-1>", search_node)
 b1.bind("<Button-1>", insert_node)
 b2.bind("<Button-1>", delete_node)
