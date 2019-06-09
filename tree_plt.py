@@ -47,7 +47,7 @@ def show_node(node, ax, height, index, font_size=12):
     return x, y, index
 
 
-def save_rb_tree(tree, index):
+def save_tree(tree, index):
     fig, ax = plt.subplots()
     fig.set_facecolor('gray')
     height = get_height(tree)

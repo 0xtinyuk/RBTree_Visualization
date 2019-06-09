@@ -7,7 +7,6 @@ import bstree
 import time
 
 root = tkinter.Tk()
-manager = []
 tree = rbtree.RBTree()
 index_displayed = -1
 
@@ -55,7 +54,6 @@ def last_img(event):
 
 
 def keep_loading_img():
-
     global index_displayed, tree
     if index_displayed > tree.index:
         index_displayed = -1
@@ -203,7 +201,5 @@ b1.pack(side=tkinter.RIGHT)
 b0.pack(side=tkinter.RIGHT)
 
 frame1.grid_propagate(False)
-manager.extend([frame1, label_img, e1, b1, b2,
-                b3, b4, b_switch_tree, b_in_order, b_post_order, b_pre_order])
 load_img()
 root.mainloop()

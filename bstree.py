@@ -1,4 +1,3 @@
-from tree_plt import save_rb_tree
 from rbtree import RBTree, RBTreeNode
 
 

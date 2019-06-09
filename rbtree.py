@@ -1,4 +1,4 @@
-from tree_plt import save_rb_tree
+from tree_plt import save_tree
 
 
 class RBTreeNode:
@@ -38,7 +38,7 @@ class RBTree:
 
     def snapshot(self):
         self.index += 1
-        save_rb_tree(self.root, "{}".format(self.index))
+        save_tree(self.root, "{}".format(self.index))
 
     def left_rotate(self, node):
         parent = node.parent
