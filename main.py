@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/python3
 import tkinter
 from PIL import Image, ImageTk
@@ -18,7 +19,7 @@ def load_img():
     index_displayed += 1
     baseheight = 400
     img = Image.open('pics/output{}.png'.format(index_displayed))
-    root.title('红黑树演示程序 第{}/{}步'.format(index_displayed, tree.index))
+    root.title('RBTree Visualization {}/{}'.format(index_displayed, tree.index))
     print('printing pics/output{}.png'.format(index_displayed))
     hpercent = (baseheight/float(img.size[1]))
     wsize = int((float(img.size[0])*float(hpercent)))
@@ -35,7 +36,7 @@ def load_last_img():
     index_displayed -= 1
     baseheight = 400
     img = Image.open('pics/output{}.png'.format(index_displayed))
-    root.title('红黑树演示程序 第{}/{}步'.format(index_displayed, tree.index))
+    root.title('RBTree Visualization {}/{}'.format(index_displayed, tree.index))
     print('displaying pics/output{}.png'.format(index_displayed))
     hpercent = (baseheight/float(img.size[1]))
     wsize = int((float(img.size[0])*float(hpercent)))
@@ -93,9 +94,9 @@ def search_node(event):
     val = int(e1.get())
     keep_loading_img()
     if tree.search_node(val):
-        tkinter.messagebox.showinfo('查找结果', '{}存在'.format(val))
+        tkinter.messagebox.showinfo('Result', '{} exists'.format(val))
     else:
-        tkinter.messagebox.showinfo('查找结果', '{}不存在'.format(val))
+        tkinter.messagebox.showinfo('Result', '{} does not exist'.format(val))
     e1.delete(0, 'end')
     pass
 
@@ -104,13 +105,13 @@ def switch_tree(event):
     global tree, b_switch_tree
     if type(tree) == rbtree.RBTree:
         tree = bstree.BSTree()
-        b_switch_tree.config(text="新建红黑树")
+        b_switch_tree.config(text="New RBTree")
         b_pre_order.config(state=tkinter.NORMAL)
         b_in_order.config(state=tkinter.NORMAL)
         b_post_order.config(state=tkinter.NORMAL)
     else:
         tree = rbtree.RBTree()
-        b_switch_tree.config(text="新建二叉搜索树")
+        b_switch_tree.config(text="New BST")
         b_pre_order.config(state=tkinter.DISABLED)
         b_in_order.config(state=tkinter.DISABLED)
         b_post_order.config(state=tkinter.DISABLED)
@@ -125,7 +126,8 @@ def pre_order_traversal(event):
 
     result = tree.pre_order_traversal(tree.root)
     tree.snapshot()
-    tkinter.messagebox.showinfo('遍历结果', '遍历顺序为{}'.format(result))
+    tkinter.messagebox.showinfo(
+        'Traversal Result', 'The order of traversal is {}'.format(result))
     keep_loading_img()
     pass
 
@@ -137,7 +139,8 @@ def in_order_traversal(event):
 
     result = tree.in_order_traversal(tree.root)
     tree.snapshot()
-    tkinter.messagebox.showinfo('遍历结果', '遍历顺序为{}'.format(result))
+    tkinter.messagebox.showinfo(
+        'Traversal Result', 'The order of traversal is {}'.format(result))
     keep_loading_img()
     pass
 
@@ -149,12 +152,13 @@ def post_order_traversal(event):
 
     result = tree.post_order_traversal(tree.root)
     tree.snapshot()
-    tkinter.messagebox.showinfo('遍历结果', '遍历顺序为{}'.format(result))
+    tkinter.messagebox.showinfo(
+        'Traversal Result', 'The order of traversal is {}'.format(result))
     keep_loading_img()
     pass
 
 
-root.title('树形结构演示系统')
+root.title('RBTree_Visualization')
 root.resizable(True, True)
 root.geometry("")
 root.wm_attributes('-topmost', 1)  # 将窗口置于最前
@@ -164,16 +168,16 @@ frame1 = tkinter.Frame(root, bd=2, relief='solid')
 label_img = tkinter.Label(frame1)
 label_img.pack(expand=1)
 frame2 = tkinter.Frame(root, relief='solid')
-b_switch_tree = tkinter.Button(frame2, text="新建二叉搜索树")
-b_pre_order = tkinter.Button(frame2, text="前序遍历")
-b_in_order = tkinter.Button(frame2, text="中序遍历")
-b_post_order = tkinter.Button(frame2, text="后序遍历")
+b_switch_tree = tkinter.Button(frame2, text="New BST")
+b_pre_order = tkinter.Button(frame2, text="Pre-order")
+b_in_order = tkinter.Button(frame2, text="In-order")
+b_post_order = tkinter.Button(frame2, text="Post-order")
 e1 = tkinter.Entry(frame2, width=10, justify=tkinter.RIGHT)
-b0 = tkinter.Button(frame2, text="查找")
-b1 = tkinter.Button(frame2, text="插入")
-b2 = tkinter.Button(frame2, text="删除")
-b3 = tkinter.Button(frame2, text="下一步")
-b4 = tkinter.Button(frame2, text="上一步")
+b0 = tkinter.Button(frame2, text="Search")
+b1 = tkinter.Button(frame2, text="Insert")
+b2 = tkinter.Button(frame2, text="Delete")
+b3 = tkinter.Button(frame2, text="Next")
+b4 = tkinter.Button(frame2, text="Previous")
 b_switch_tree.bind("<Button-1>", switch_tree)
 b_pre_order.bind("<Button-1>", pre_order_traversal)
 b_in_order.bind("<Button-1>", in_order_traversal)
