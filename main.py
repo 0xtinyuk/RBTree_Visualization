@@ -12,6 +12,14 @@ tree = rbtree.RBTree()
 index_displayed = -1
 
 
+def title_type():
+    global root, tree
+    if type(tree) == rbtree.RBTree:
+        return 'RBTree Visualization {}/{}'
+    else:
+        return 'BSTree Visualization {}/{}'
+
+
 def load_img():
     global root, frame1, label_img, tree, index_displayed
     if index_displayed+1 > tree.index:
@@ -19,7 +27,7 @@ def load_img():
     index_displayed += 1
     baseheight = 400
     img = Image.open('pics/output{}.png'.format(index_displayed))
-    root.title('RBTree Visualization {}/{}'.format(index_displayed, tree.index))
+    root.title(title_type().format(index_displayed, tree.index))
     print('printing pics/output{}.png'.format(index_displayed))
     hpercent = (baseheight/float(img.size[1]))
     wsize = int((float(img.size[0])*float(hpercent)))
@@ -36,7 +44,7 @@ def load_last_img():
     index_displayed -= 1
     baseheight = 400
     img = Image.open('pics/output{}.png'.format(index_displayed))
-    root.title('RBTree Visualization {}/{}'.format(index_displayed, tree.index))
+    root.title(title_type().format(index_displayed, tree.index))
     print('displaying pics/output{}.png'.format(index_displayed))
     hpercent = (baseheight/float(img.size[1]))
     wsize = int((float(img.size[0])*float(hpercent)))
